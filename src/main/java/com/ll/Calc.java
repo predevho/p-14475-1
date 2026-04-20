@@ -13,6 +13,18 @@ public class Calc {
         String[] expressionBits = expression.split(" ");
         List<String> bitsList = new ArrayList<>(Arrays.asList(expressionBits));
 
+        if (expression.contains("(")) {
+            int open = expression.lastIndexOf('(');
+            int close = expression.indexOf(')', open);
+            String inner = expression.substring(open + 1, close);
+
+            int innerResult = run(inner);
+            expression = expression.substring(0, open) + innerResult + expression.substring(close + 1);
+
+            return run(expression);
+        }
+
+
         int i = 1;
         while(i < bitsList.size()) {
             String bitString = bitsList.get(i);
