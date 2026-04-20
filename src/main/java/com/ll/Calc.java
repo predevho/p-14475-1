@@ -3,16 +3,19 @@ package com.ll;
 public class Calc {
     public static int run(String expression) {
         String[] expressionBits = expression.split(" ");
-
-        int num1 = Integer.parseInt(expressionBits[0]);
-        int num2 = Integer.parseInt(expressionBits[2]);
-
-        if (expressionBits[1].equals("+")) {
-            return num1 + num2;
-        } else if (expressionBits[1].equals("-")) {
-            return num1 - num2;
-        } else {
-            throw new RuntimeException("지원하지 않는 연산입니다.");
+        //expressionBits 길이 만큼 숫자를 연산하는 곳에 대입하는 곳 필요
+        //x + y - z =? 식이니까 2n만큼 숫자들이 배치
+        int result = Integer.parseInt(expressionBits[0]);
+        for(int i = 1; i < expressionBits.length; i = i + 2) {
+            String bits = expressionBits[i];
+            int nextNum = Integer.parseInt(expressionBits[i + 1]);
+            if(bits.equals("+")) {
+                result += nextNum;
+            }
+            else if(bits.equals("-")) {
+                result -= nextNum;
+            }
         }
+        return result;
     }
 }
